@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import androidx.navigation.Navigation
 
 /**
@@ -25,6 +26,11 @@ class GameFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?){
         super.onViewCreated(view, savedInstanceState)
+        if(arguments != null){
+            val playerName = GameFragmentArgs.fromBundle(requireArguments()).playerName
+            val txtTurn = view.findViewById<TextView>(R.id.txtTurn)
+            txtTurn.text = "$playerName's Turn"
+        }
         val btnBack = view.findViewById<Button>(R.id.btnBack)
         btnBack.setOnClickListener{
             val action = GameFragmentDirections.actionMainFragment()

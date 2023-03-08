@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import androidx.navigation.Navigation
 
 /**
@@ -27,7 +28,9 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val btnStart = view.findViewById<Button>(R.id.btnStart)
         btnStart.setOnClickListener{
-            val action = MainFragmentDirections.actionGameFragment()
+            val txtName = view.findViewById<TextView>(R.id.txtName)
+            val playerName = txtName.text.toString()
+            val action = MainFragmentDirections.actionGameFragment(playerName)
             Navigation.findNavController(it).navigate(action)
         }
     }
