@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.navigation.Navigation
 
 /**
@@ -15,7 +16,6 @@ import androidx.navigation.Navigation
  * create an instance of this fragment.
  */
 class GameFragment : Fragment() {
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,10 +31,30 @@ class GameFragment : Fragment() {
             val txtTurn = view.findViewById<TextView>(R.id.txtTurn)
             txtTurn.text = "$playerName's Turn"
         }
-        val btnBack = view.findViewById<Button>(R.id.btnBack)
-        btnBack.setOnClickListener{
-            val action = GameFragmentDirections.actionMainFragment()
-            Navigation.findNavController(it).navigate(action)
+        var score = 0
+        var trueAns = 0
+        val first = (1..1000).random()
+        val second = (1..1000).random()
+        val txtNumbers = view.findViewById<TextView>(R.id.txtNumbers)
+        txtNumbers.text = "$first + $second"
+        trueAns = first + second
+        val btnSubmit = view.findViewById<Button>(R.id.btnSubmit)
+        btnSubmit.setOnClickListener{
+            val txtAnswer = view.findViewById<TextView>(R.id.txtAnswer)
+            val answer = txtAnswer.text.toString().toInt()
+            if(trueAns == answer){
+                score++
+                Toast.makeText(activity, "Congratulations! you get 1 point",Toast.LENGTH_SHORT).show()
+                val first = (1..1000).random()
+                val second = (1..1000).random()
+                val txtNumbers = view.findViewById<TextView>(R.id.txtNumbers)
+                txtNumbers.text = "$first + $second"
+                trueAns = first + second
+            }
+            else{
+                val action = GameFragmentDirections.actionResultFragment(score)
+                Navigation.findNavController(it).navigate(action)
+            }
         }
     }
 
