@@ -33,11 +33,11 @@ class GameFragment : Fragment() {
         }
         var score = 0
         var trueAns = 0
-        val first = (1..1000).random()
-        val second = (1..1000).random()
+        val firstNum = (1..1000).random()
+        val secondNum = (1..1000).random()
         val txtNumbers = view.findViewById<TextView>(R.id.txtNumbers)
-        txtNumbers.text = "$first + $second"
-        trueAns = first + second
+        txtNumbers.text = "$firstNum + $secondNum"
+        trueAns = firstNum + secondNum
         val btnSubmit = view.findViewById<Button>(R.id.btnSubmit)
         btnSubmit.setOnClickListener{
             val txtAnswer = view.findViewById<TextView>(R.id.txtAnswer)
@@ -45,11 +45,11 @@ class GameFragment : Fragment() {
             if(trueAns == answer){
                 score++
                 Toast.makeText(activity, "Congratulations! you get 1 point",Toast.LENGTH_SHORT).show()
-                val first = (1..1000).random()
-                val second = (1..1000).random()
+                val firstNum = (1..1000).random()
+                val secondNum = (1..1000).random()
                 val txtNumbers = view.findViewById<TextView>(R.id.txtNumbers)
-                txtNumbers.text = "$first + $second"
-                trueAns = first + second
+                txtNumbers.text = "$firstNum + $secondNum"
+                trueAns = firstNum + secondNum
             }
             else{
                 val action = GameFragmentDirections.actionResultFragment(score)
